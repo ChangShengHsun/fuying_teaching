@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0d1b2a;
+        --soft-ink: #1b263b;
+        --sun: #f4d35e;
+        --coral: #ee6c4d;
+        --sea: #3d5a80;
+        --mint: #98c1d9;
+        --cloud: #f8f5f2;
+        --glow: #ffd166;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        font-family: "Space Grotesk", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(1200px 800px at 10% 10%, #fff9e6 0%, #f8efe3 35%, #f2e7db 60%, #ece1d7 100%);
+        overflow-x: hidden;
+      }
+
+      .scene {
+        position: relative;
+        min-height: 100vh;
+        padding: 48px 6vw 80px;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 56px;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        letter-spacing: 1px;
+      }
+
+      .nav a {
+        text-decoration: none;
+        color: var(--soft-ink);
+        font-weight: 500;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 24px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 40px;
+        align-items: center;
+      }
+
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(40px, 5vw, 68px);
+        margin: 0 0 12px;
+      }
+
+      .hero p {
+        font-size: 18px;
+        line-height: 1.7;
+        max-width: 540px;
+      }
+
+      .cta-row {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-top: 24px;
+      }
+
+      .btn {
+        border: none;
+        padding: 14px 22px;
+        border-radius: 999px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--coral), var(--sun));
+        color: #1f1a0f;
+        box-shadow: 0 14px 30px rgba(238, 108, 77, 0.25);
+      }
+
+      .btn-secondary {
+        background: #ffffff;
+        color: var(--soft-ink);
+        border: 1px solid rgba(27, 38, 59, 0.2);
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 40px rgba(61, 90, 128, 0.2);
+      }
+
+      .portrait-card {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 24px;
+        padding: 28px;
+        box-shadow: 0 30px 60px rgba(13, 27, 42, 0.12);
+        backdrop-filter: blur(12px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .portrait-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, rgba(152, 193, 217, 0.15), transparent 60%);
+        pointer-events: none;
+      }
+
+      .portrait {
+        width: 100%;
+        height: 260px;
+        border-radius: 18px;
+        background: linear-gradient(145deg, #dce9f4, #f6efe5);
+        display: grid;
+        place-items: center;
+        font-size: 64px;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 16px;
+        margin-top: 22px;
+      }
+
+      .stat {
+        padding: 14px 18px;
+        background: var(--cloud);
+        border-radius: 14px;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 20px;
+      }
+
+      .floating-shapes span {
+        position: absolute;
+        border-radius: 999px;
+        opacity: 0.5;
+        filter: blur(0.5px);
+        animation: float 18s ease-in-out infinite;
+      }
+
+      .floating-shapes span:nth-child(1) {
+        width: 180px;
+        height: 180px;
+        background: rgba(152, 193, 217, 0.5);
+        top: 6%;
+        left: 8%;
+      }
+
+      .floating-shapes span:nth-child(2) {
+        width: 120px;
+        height: 120px;
+        background: rgba(238, 108, 77, 0.45);
+        top: 20%;
+        right: 12%;
+        animation-delay: -4s;
+      }
+
+      .floating-shapes span:nth-child(3) {
+        width: 240px;
+        height: 240px;
+        background: rgba(244, 211, 94, 0.4);
+        bottom: 10%;
+        left: 20%;
+        animation-delay: -8s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) translateX(0) scale(1);
+        }
+        50% {
+          transform: translateY(-24px) translateX(18px) scale(1.05);
+        }
+      }
+
+      .section {
+        display: grid;
+        gap: 18px;
+      }
+
+      .section h2 {
+        font-family: "Playfair Display", serif;
+        margin: 0;
+        font-size: clamp(28px, 3vw, 36px);
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 18px;
+      }
+
+      .card {
+        padding: 20px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(13, 27, 42, 0.08);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-8px) rotate(-1deg);
+        box-shadow: 0 18px 40px rgba(13, 27, 42, 0.12);
+      }
+
+      .timeline {
+        display: grid;
+        gap: 16px;
+      }
+
+      .timeline-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 20px;
+        background: #ffffffcc;
+        border-radius: 16px;
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--coral);
+        box-shadow: 0 0 0 6px rgba(238, 108, 77, 0.2);
+      }
+
+      .footer {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 14px;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 700px) {
+        .nav-links {
+          display: none;
+        }
+        .scene {
+          padding: 36px 6vw 64px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scene">
+      <div class="floating-shapes" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <header class="nav reveal">
+        <div class="logo">Fuying Studio</div>
+        <nav class="nav-links">
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+          <a href="#timeline">Timeline</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+
+      <main class="hero">
+        <section class="reveal">
+          <h1>Designing bold ideas into tangible experiences.</h1>
+          <p>
+            I craft playful digital products, combining cinematic visuals with
+            human-centered storytelling. This space shows what I build, how I
+            work, and the spark that drives each project.
+          </p>
+          <div class="cta-row">
+            <button class="btn btn-primary">Start a project</button>
+            <button class="btn btn-secondary">Download resume</button>
+          </div>
+        </section>
+        <aside class="portrait-card reveal">
+          <div class="portrait">✦</div>
+          <div class="stats">
+            <div class="stat">
+              <strong>08+</strong>
+              Years crafting.
+            </div>
+            <div class="stat">
+              <strong>24</strong>
+              Product launches.
+            </div>
+            <div class="stat">
+              <strong>5</strong>
+              Creative awards.
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <section id="about" class="section reveal">
+        <h2>About</h2>
+        <p>
+          I thrive in the space between strategy and spectacle. From interactive
+          installations to thoughtful web experiences, my work balances utility
+          with delight and always carries a unique visual signature.
+        </p>
+      </section>
+
+      <section id="work" class="section reveal">
+        <h2>Signature Projects</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>Solar Drift</h3>
+            <p>Ambient dashboards with live data glow and animated insights.</p>
+          </article>
+          <article class="card">
+            <h3>Echo Atlas</h3>
+            <p>Immersive maps with layered audio and tactile navigation.</p>
+          </article>
+          <article class="card">
+            <h3>Pulse Archive</h3>
+            <p>Story-driven portfolio for archival media and legacy brands.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="timeline" class="section reveal">
+        <h2>Experience Timeline</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="dot"></span>
+            <div>2024 · Lead designer for product launches.</div>
+          </div>
+          <div class="timeline-item">
+            <span class="dot"></span>
+            <div>2022 · Built a creative lab for immersive prototyping.</div>
+          </div>
+          <div class="timeline-item">
+            <span class="dot"></span>
+            <div>2019 · Designed interactive brand experiences.</div>
+          </div>
+        </div>
+      </section>
+
+      <footer id="contact" class="footer reveal">
+        <div>Ready to create something striking?</div>
+        <div>hello@fuying.studio · +886 900 000 000</div>
+      </footer>
+    </div>
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>
