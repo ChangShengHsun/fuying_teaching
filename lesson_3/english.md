@@ -14,6 +14,7 @@
 1. She **goes** to school at 7:30.
 2. They **play** soccer after class.
 3. I **sometimes** read comic books.
+4. He **never** eats vegetables.
 
 ## 練習
 1. 改成 he：`I watch TV.` -> __________
